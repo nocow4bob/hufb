@@ -19,7 +19,7 @@ def main(ip,host,file):
 
 	req = urllib2.Request(ip_req)
 	req.add_header('Host', host)
-	req.add_header('User-agent','MyTest')
+	req.add_header('User-agent','HUFB')
 
 	try:
 		res = urllib2.urlopen(req)
